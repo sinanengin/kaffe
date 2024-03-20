@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kaffe/components/button.dart';
+import 'package:kaffe/pages/pretty_button.dart';
 
 void main() {
   runApp(
@@ -17,11 +18,12 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 240, 240, 240),
+        backgroundColor: Colors.grey.shade200,
         body: Padding(
           padding: EdgeInsets.all(25.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(height: 25),
               // marka ismi
@@ -86,7 +88,18 @@ class IntroPage extends StatelessWidget {
                 height: 25,
               ),
 
-              MyButton(text: "Hadi Başlayalım!")
+              /*   PrettyNeumorphicButton(
+                  label: "Haydi Başlayalım",
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/menupage");
+                  }),*/
+
+              MyButton(
+                text: "Hadi Başlayalım!",
+                onTap: () {
+                  Navigator.pushNamed(context, '/menupage');
+                },
+              ),
             ],
           ),
         ));
