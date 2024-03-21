@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kaffe/components/button.dart';
-import 'package:kaffe/pages/pretty_button.dart';
+import 'package:kaffe/pages/menu_page.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
+    MaterialApp(
       home: IntroPage(),
       debugShowCheckedModeBanner: false,
-    ), // use MaterialApp
+      routes: {
+        '/menupage': (context) => MenuPage(),
+      },
+    ),
   );
 }
 
@@ -88,17 +90,22 @@ class IntroPage extends StatelessWidget {
                 height: 25,
               ),
 
-              /*   PrettyNeumorphicButton(
-                  label: "Haydi Başlayalım",
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/menupage");
-                  }),*/
-
-              MyButton(
-                text: "Hadi Başlayalım!",
-                onTap: () {
-                  Navigator.pushNamed(context, '/menupage');
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 120,
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40)),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MenuPage()),
+                  );
                 },
+                child: Text("Hadi Başlayalım!"),
               ),
             ],
           ),
