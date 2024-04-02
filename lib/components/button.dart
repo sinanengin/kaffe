@@ -15,9 +15,9 @@ class MyButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: Color.fromARGB(255, 201, 201, 201),
+            color: const Color.fromARGB(255, 201, 201, 201),
             borderRadius: BorderRadius.circular(40)),
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -28,7 +28,7 @@ class MyButton extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward,
               color: Colors.black,
             ),

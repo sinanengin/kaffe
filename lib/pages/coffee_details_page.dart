@@ -134,14 +134,14 @@ class _CoffeeDeatilsPageState extends State<CoffeeDeatilsPage> {
           ),
           Container(
             color: Colors.grey[300],
-            padding: EdgeInsets.all(25),
+            padding: const EdgeInsets.all(25),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${widget.coffee.price} \T\L",
+                      "${widget.coffee.price} TL",
                       style: TextStyle(
                         color: Colors.grey[900],
                         fontWeight: FontWeight.bold,

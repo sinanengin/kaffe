@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kaffe/components/button.dart';
 import 'package:kaffe/components/coffee_tile.dart';
-import 'package:kaffe/models/coffee.dart';
 import 'package:kaffe/models/shop.dart';
-import 'package:kaffe/pages/cart_page.dart';
 import 'package:kaffe/pages/coffee_details_page.dart';
 import 'package:provider/provider.dart';
 
@@ -171,7 +167,7 @@ class _MenuPageState extends State<MenuPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Espresso"),
+                        const Text("Espresso"),
                         Text(
                           "49.90 TL",
                           style: TextStyle(color: Colors.grey[700]),
@@ -180,7 +176,7 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ],
                 ),
-                Icon(
+                const Icon(
                   Icons.favorite,
                   color: Colors.grey,
                   size: 28,
