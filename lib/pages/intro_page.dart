@@ -1,18 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kaffe/pages/menu_page.dart';
-
-void main() {
-  runApp(
-    MaterialApp(
-      home: IntroPage(),
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/menupage': (context) => MenuPage(),
-      },
-    ),
-  );
-}
+import 'package:kaffe/components/button.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -22,29 +10,22 @@ class IntroPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
         body: Padding(
-          padding: EdgeInsets.all(25.0),
+          padding: const EdgeInsets.all(25.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               // marka ismi
 
               Row(
                 children: [
                   const SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Image(
-                      image: AssetImage('lib/images/coffee-cup.png'),
-                    ),
-                  ),
-                  const SizedBox(width: 5), // İstenirse bir boşluk eklenebilir
+                      width: 108), // İstenirse bir boşluk eklenebilir
                   Text(
-                    "kaffe",
+                    "K A F F E",
                     style: GoogleFonts.inconsolata(
                       fontSize: 28,
-                      fontWeight: FontWeight.w900,
                       color: Colors.black,
                     ),
                   ),
@@ -90,23 +71,11 @@ class IntroPage extends StatelessWidget {
                 height: 25,
               ),
 
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 120,
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40)),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MenuPage()),
-                  );
-                },
-                child: Text("Hadi Başlayalım!"),
-              ),
+              MyButton(
+                  text: "Hadi Başlayalım",
+                  onTap: () {
+                    Navigator.pushNamed(context, '/menupage');
+                  })
             ],
           ),
         ));

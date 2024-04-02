@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kaffe/components/button.dart';
 import 'package:kaffe/components/coffee_tile.dart';
 import 'package:kaffe/models/coffee.dart';
+import 'package:kaffe/models/shop.dart';
+import 'package:kaffe/pages/cart_page.dart';
+import 'package:kaffe/pages/coffee_details_page.dart';
+import 'package:provider/provider.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -13,41 +18,46 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  //kahve menüsü
+  // coffee details navigator
+  void navigateToCoffeeDetails(int index) {
+    final shop = context.read<Shop>();
+    final coffeeMenu = shop.coffeeMenu;
 
-  List CoffeeMenu = [
-    Coffee(
-        name: "Latte",
-        price: "69.90",
-        imagePath: "lib/images/latte.jpg",
-        rating: "4.1",
-        description: "Sütlü bir kahve."),
-    Coffee(
-        name: "Espresso",
-        price: "49.90",
-        imagePath: "lib/images/espresso.jpg",
-        rating: "4.7",
-        description: "Koyu kavrulmuş kahve.")
-  ];
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CoffeeDeatilsPage(
+          coffee: coffeeMenu[index],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final shop = context.read<Shop>();
+    final coffeeMenu = shop.coffeeMenu;
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey[800],
         elevation: 0,
-        leading: Icon(
+        leading: const Icon(
           Icons.menu,
-          color: Colors.grey[900],
         ),
-        title: Text(
+        title: const Text(
           "K A F F E",
-          style: TextStyle(
-            color: Colors.grey[900],
-          ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/cartpage');
+              },
+              icon: const Icon(Icons.shopping_cart))
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +68,7 @@ class _MenuPageState extends State<MenuPage> {
               color: Colors.brown,
               borderRadius: BorderRadius.circular(20),
             ),
-            margin: EdgeInsets.symmetric(horizontal: 15),
+            margin: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -77,7 +87,9 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                     MyButton(
                       text: "Üye Ol",
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/registerpage');
+                      },
                     ),
                     const SizedBox(
                       height: 40,
@@ -97,10 +109,10 @@ class _MenuPageState extends State<MenuPage> {
             child: TextField(
               decoration: InputDecoration(
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(20)),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(20)),
                   hintText: "Buradan arama yapabilirsin.."),
             ),
@@ -124,9 +136,11 @@ class _MenuPageState extends State<MenuPage> {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: CoffeeMenu.length,
-              itemBuilder: (context, index) =>
-                  CoffeeTile(coffee: CoffeeMenu[index]),
+              itemCount: coffeeMenu.length,
+              itemBuilder: (context, index) => CoffeeTile(
+                coffee: coffeeMenu[index],
+                onTap: () => navigateToCoffeeDetails(index),
+              ),
             ),
           ),
           const SizedBox(
@@ -140,7 +154,7 @@ class _MenuPageState extends State<MenuPage> {
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(20),
             ),
-            margin: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
+            margin: const EdgeInsets.only(left: 25, right: 25, bottom: 15),
             padding: const EdgeInsets.all(20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,15 +162,16 @@ class _MenuPageState extends State<MenuPage> {
                 Row(
                   children: [
                     Image.asset(
-                      'lib/images/latte.jpg',
-                      height: 60,
+                      'lib/images/expresso.png',
+                      height: 40,
                     ),
                     const SizedBox(
-                      width: 20,
+                      width: 10,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text("Espresso"),
                         Text(
                           "49.90 TL",
                           style: TextStyle(color: Colors.grey[700]),
