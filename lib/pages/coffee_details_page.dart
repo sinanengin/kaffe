@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kaffe/components/button.dart';
+import 'package:kaffe/database/db_helper.dart';
+import 'package:kaffe/models/cart.dart';
 import 'package:kaffe/models/coffee.dart';
-import 'package:kaffe/models/shop.dart';
-import 'package:provider/provider.dart';
+import 'package:kaffe/models/user.dart';
 
 class CoffeeDeatilsPage extends StatefulWidget {
   final Coffee coffee;
-  const CoffeeDeatilsPage({super.key, required this.coffee});
+  final User? user;
+
+  const CoffeeDeatilsPage({super.key, required this.coffee, this.user});
 
   @override
   State<CoffeeDeatilsPage> createState() => _CoffeeDeatilsPageState();
@@ -30,11 +33,14 @@ class _CoffeeDeatilsPageState extends State<CoffeeDeatilsPage> {
     });
   }
 
-  void addToCart() {
-    if (quantityCount > 0) {
-      final shop = context.read<Shop>();
-
-      shop.addToCart(widget.coffee, quantityCount);
+  void addToCart() async {
+    if (quantityCount > 0 && widget.user != null) {
+      DatabaseHelper dbHelper = DatabaseHelper();
+      await dbHelper.insertCart(Cart(
+        userId: widget.user!.userId!,
+        coffeeId: widget.coffee.coffeeId!,
+        quantity: quantityCount,
+      ));
 
       showDialog(
         context: context,

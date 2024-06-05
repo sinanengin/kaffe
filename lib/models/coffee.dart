@@ -1,4 +1,5 @@
 class Coffee {
+  int? coffeeId;
   String name;
   String price;
   String imagePath;
@@ -6,6 +7,7 @@ class Coffee {
   String description;
 
   Coffee({
+    this.coffeeId,
     required this.name,
     required this.price,
     required this.imagePath,
@@ -13,9 +15,25 @@ class Coffee {
     required this.description,
   });
 
-  String get _name => name;
-  String get _price => price;
-  String get _imagePath => imagePath;
-  String get _rating => rating;
-  String get _description => description;
+  Map<String, dynamic> toMap() {
+    return {
+      'coffeeId': coffeeId,
+      'name': name,
+      'price': price,
+      'imagePath': imagePath,
+      'rating': rating,
+      'description': description,
+    };
+  }
+
+  factory Coffee.fromMap(Map<String, dynamic> map) {
+    return Coffee(
+      coffeeId: map['coffeeId'],
+      name: map['name'],
+      price: map['price'],
+      imagePath: map['imagePath'],
+      rating: map['rating'],
+      description: map['description'],
+    );
+  }
 }
