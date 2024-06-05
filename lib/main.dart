@@ -6,8 +6,20 @@ import 'package:kaffe/pages/login_page.dart';
 import 'package:kaffe/pages/menu_page.dart';
 import 'package:kaffe/pages/register_page.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // ignore: unused_local_variable
+  final database = openDatabase(
+    join(await getDatabasesPath(), 'kaffe_database.db'),
+    onCreate: (db, version) {
+      // Veritabanı tablolarını oluşturma işlemleri burada yapılır
+      // Örnek: db.execute("CREATE TABLE IF NOT EXISTS ...");
+    },
+    version: 1,
+  );
   runApp(ChangeNotifierProvider(
     create: (context) => Shop(),
     child: const MyApp(),

@@ -67,7 +67,7 @@ class RegisterPage extends StatelessWidget {
                   child: TextFormField(
                     decoration: const InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Şifre',
+                      hintText: 'Telefon Numarası',
                     ),
                   ),
                 ),
@@ -88,7 +88,7 @@ class RegisterPage extends StatelessWidget {
                   child: TextFormField(
                     decoration: const InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Şifre Tekrar',
+                      hintText: 'Şifre',
                     ),
                   ),
                 ),
